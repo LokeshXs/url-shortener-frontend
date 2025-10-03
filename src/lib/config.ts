@@ -1,2 +1,2 @@
 
-export const server_url = "http://54.237.135.223"
+export const server_url = "https://shorti.ashwacreations.com"
