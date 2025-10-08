@@ -6,6 +6,7 @@ import { z } from "zod";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -32,14 +33,14 @@ export default function LinkShortenerForm({
     resolver: zodResolver(formScheama),
     defaultValues: {
       destinationUrl: "",
+      customShortCode:""
     },
   });
   const [isPending, startTransition] = useTransition();
   const { getToken } = useAuth();
-  const [expiredDate,setExpiredDate] = useState<Date|null>(null)
+
 
   async function submitHandler(values: z.infer<typeof formScheama>) {
-  
     startTransition(async () => {
       try {
         setShortURL("");
@@ -51,7 +52,8 @@ export default function LinkShortenerForm({
           `${server_url}/shorten`,
           {
             long_url: values.destinationUrl,
-            expired_at:expirationTime?.toISOString() || null
+            expired_at: expirationTime?.toISOString() || null,
+            shortcode: values.customShortCode,
           },
           {
             headers: {
@@ -100,8 +102,43 @@ export default function LinkShortenerForm({
             )}
           />
 
-          <div className=" flex justify-between">
-            <DateTimePickerForm setExpiredDate={setExpiredDate} form={form}/>
+          <FormField
+            control={form.control}
+            name="customShortCode"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Custom Code</FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={isPending}
+                    placeholder="code20"
+                    {...field}
+                    className=" placeholder:text-neutral-400 focus-visible:ring-neutral-200 max-w-40"
+                  />
+                </FormControl>
+                <FormMessage />
+                <FormDescription className=" text-xs">
+                Minimum length 6 (optional)
+              </FormDescription>
+              </FormItem>
+            )}
+          />
+
+          <div className=" flex justify-between items-end">
+            <FormField
+              control={form.control}
+              name="time"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Expiration (Date/Time)</FormLabel>
+                  <FormControl>
+                    <DateTimePickerForm form={form} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <Button
               disabled={isPending}
               type="submit"

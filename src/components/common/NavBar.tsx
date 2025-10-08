@@ -56,7 +56,9 @@ export default function NavBar() {
           </ul>
           <div className=" h-8 w-[1px] bg-gradient-to-b from-transparent via-muted-foreground/40 to-transparent" />
           {isSignedIn ? (
-            <Button size="sm">Dashboard</Button>
+            <Button size="sm" asChild>
+              <Link href="/dashboard">Dashboard</Link>
+            </Button>
           ) : (
             <div className=" flex items-center gap-2">
               <SignInButton oauthFlow="popup" mode="modal">

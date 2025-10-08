@@ -29,10 +29,10 @@ import { Dispatch, SetStateAction } from "react";
 
 
 export function DateTimePickerForm({
-  setExpiredDate,
+
   form
 }: {
-  setExpiredDate: Dispatch<SetStateAction<Date | null>>;
+ 
   form: UseFormReturn<{
     destinationUrl: string;
     time?: Date | undefined;
