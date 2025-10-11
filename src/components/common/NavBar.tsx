@@ -25,13 +25,13 @@ export default function NavBar() {
   });
 
   return (
-    <Container className=" z-[99] fixed top-0 left-1/2 -translate-x-1/2 w-full  mt-2  flex justify-center   ">
+    <Container className=" z-[12] fixed top-0 left-1/2 -translate-x-1/2 w-full  mt-2  flex justify-center   ">
       <motion.nav
         className={cn(
           " w-full flex justify-between items-center transition-all duration-300 ease-linear border px-4 py-2 rounded-full bg-muted/40 backdrop-blur-md "
         )}
         animate={{
-          width: scrolled ? "90%" : "100%",
+          width: scrolled ? "80%" : "90%",
         }}
         transition={{
           duration: 0.1,

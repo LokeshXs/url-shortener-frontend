@@ -9,8 +9,8 @@ export default function Home() {
       <HeroSection />
       <FeaturesSection/>
 
-      <div className=" w-[1px] h-full absolute bg-gradient-to-b from-transparent via-neutral-300 to-transparent top-0 left-0"/>
-        <div className=" w-[1px] h-full absolute bg-gradient-to-b from-transparent via-neutral-300 to-transparent top-0 right-0"/>
+      <div className=" w-[1px] h-full absolute bg-gradient-to-b from-neutral-300/20 via-neutral-300/60 to-neutral-300/20 top-0 left-0"/>
+        <div className=" w-[1px] h-full absolute bg-gradient-to-b from-neutral-300/20 via-neutral-300/60 to-neutral-300/20 top-0 right-0"/>
     </Container>
   );
 }
