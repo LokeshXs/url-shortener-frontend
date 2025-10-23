@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { columns, StatsData } from "./Column";
 import {
   flexRender,
@@ -18,43 +18,23 @@ import {
   IconArrowBigRightFilled,
 } from "@tabler/icons-react";
 import { server_url } from "@/lib/config";
+import { useQuery } from "@tanstack/react-query";
 
 export default function DataTable() {
   const { getToken, isLoaded, isSignedIn } = useAuth();
-  const [data, setData] = useState<StatsData[]>([]);
-  const [fetching, setFetching] = useState(true);
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [totalPages, setTotalPages] = useState(1);
 
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    pageCount: totalPages,
-    state: {
-      pagination: { pageIndex, pageSize },
-    },
-    onPaginationChange: (updater) => {
-      const next =
-        typeof updater === "function"
-          ? updater({ pageIndex, pageSize })
-          : updater;
-
-      setPageIndex(next.pageIndex);
-      setPageSize(next.pageSize);
-    },
-    manualPagination: true,
-  });
-
   const statsFetcher = useCallback(async () => {
     try {
-      setFetching(true);
       const token = await getToken({ template: "default" });
+
       if (token === null) {
-        setData([]);
-        return;
+        return [];
       }
+
+      console.log(token);
       const res = await axios.get(
         `${server_url}/stats`,
 
@@ -73,25 +53,47 @@ export default function DataTable() {
 
       const stats = data.stats as StatsData[];
       let totalPages = data.totalPages as number;
-      totalPages = totalPages === 0?1:totalPages
+      totalPages = totalPages === 0 ? 1 : totalPages;
       setTotalPages(totalPages);
 
-      setData(stats);
+      return stats;
     } catch (err: any) {
       toast.error("Failed to fetch the stats");
-    } finally {
-      setFetching(false);
+      return [];
     }
   }, [getToken, pageIndex, pageSize]);
 
-  useEffect(() => {
-    if (!isLoaded || !isSignedIn) return;
-    statsFetcher();
-  }, [statsFetcher, isLoaded, isSignedIn]);
+  const { data, isLoading } = useQuery({
+    queryKey: ["urls", isLoaded, isSignedIn, pageSize, pageIndex],
+    queryFn: async () => {
+      if (!isLoaded || !isSignedIn) return [];
+      return statsFetcher();
+    },
+  });
+
+  const table = useReactTable({
+    data: data || [],
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    pageCount: totalPages,
+    state: {
+      pagination: { pageIndex, pageSize },
+    },
+    onPaginationChange: (updater) => {
+      const next =
+        typeof updater === "function"
+          ? updater({ pageIndex, pageSize })
+          : updater;
+
+      setPageIndex(next.pageIndex);
+      setPageSize(next.pageSize);
+    },
+    manualPagination: true,
+  });
 
   return (
     <>
-      {fetching ? (
+      {isLoading ? (
         <Skeleton className="w-full h-[300px]" />
       ) : (
         <motion.div
