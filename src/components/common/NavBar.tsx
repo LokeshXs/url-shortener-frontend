@@ -16,7 +16,7 @@ export default function NavBar() {
   const [scrolled, setScrolled] = useState<boolean>(false);
   const pathname = usePathname();
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    console.log(latest);
+
     if (latest > 0.2) {
       setScrolled(true);
     } else {
@@ -38,7 +38,7 @@ export default function NavBar() {
           ease: "linear",
         }}
       >
-        <p className=" font-medium">U<span className=" text-emerald-600">r</span>lbit</p>
+        <Link href="/" className=" font-medium">U<span className=" text-emerald-600">r</span>lbit</Link>
 
         <div
           className={cn(" flex  items-center gap-4", {

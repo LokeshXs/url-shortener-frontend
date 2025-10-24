@@ -1,3 +1,4 @@
+import CopyButton from "@/components/common/CopyButton";
 import RowMenu from "@/components/common/RowMenu";
 import { Button } from "@/components/ui/button";
 import { IconDotsVertical } from "@tabler/icons-react";
@@ -16,7 +17,7 @@ const columnHelper = createColumnHelper<StatsData>();
 export const columns = [
   columnHelper.accessor("shorturl", {
     cell: (info) => (
-      <span className=" text-left inline-block w-full">{info.getValue()}</span>
+      <div className=" text-left  w-full flex items-center gap-0 "><CopyButton variant="secondary" text={info.getValue()}/><p className="truncate max-sm:text-sm">{info.getValue()}</p></div>
     ),
     header: () => (
       <span className=" text-left w-full inline-block  ">Short url</span>

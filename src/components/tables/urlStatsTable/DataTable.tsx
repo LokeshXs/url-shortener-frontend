@@ -100,9 +100,9 @@ export default function DataTable() {
           initial={{ opacity: 0, filter: "blur(10px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
           transition={{ duration: 0.3 }}
-          className=" overflow-hidden border  rounded-lg"
+          className=" overflow-hidden  max-sm:overflow-x-scroll  border  rounded-lg relative "
         >
-          <table className=" w-full   ">
+          <table className=" w-full min-w-[500px]  ">
             <thead className="  w-full bg-muted border-b ">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id} className="h-12 ">
@@ -123,7 +123,7 @@ export default function DataTable() {
               ))}
             </thead>
 
-            <tbody className="  divide-y ">
+            <tbody className="  divide-y max-sm:overflow-x-scroll ">
               {table.getRowModel().rows.map((row) => (
                 <tr key={row.id} className="h-10  hover:bg-muted/40  ">
                   {row.getVisibleCells().map((cell) => (
@@ -141,7 +141,7 @@ export default function DataTable() {
               ))}
             </tbody>
           </table>
-          <div className="flex items-center justify-between px-4 py-2 bg-muted">
+          <div className="flex items-center justify-between px-4 py-2  w-full bg-muted  bottom-0 left-0 sticky ">
             <span className=" text-xs inline-block">
               Page <b>{pageIndex + 1}</b> of <b>{table.getPageCount()}</b>
             </span>

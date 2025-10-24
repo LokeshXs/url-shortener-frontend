@@ -69,14 +69,14 @@ export function DateTimePickerForm({
       control={form.control}
       name="time"
       render={({ field }) => (
-        <FormItem className="flex flex-col">
+        <FormItem className="flex flex-col ">
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-full pl-3 text-left font-normal text-primary",
+                    "w-full pl-3 text-left font-normal text-primary  max-sm:text-sm",
                     !field.value && "text-muted-foreground"
                   )}
                 >

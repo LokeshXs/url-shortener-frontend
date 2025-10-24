@@ -5,8 +5,9 @@ import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { cn } from "@/lib/utils";
 
-export default function CopyButton({ text }: { text: string }) {
+export default function CopyButton({ text,variant="primary" }: { text: string,variant?:"primary"|"secondary" }) {
   const [copying, setCopying] = useState(false);
 
   function copyhandler() {
@@ -26,7 +27,9 @@ export default function CopyButton({ text }: { text: string }) {
   }
 
   return (
-    <Button onClick={() => copyhandler()} className=" bg-neutral-700 relative w-10 cursor-pointer">
+    <Button onClick={() => copyhandler()} className={cn(" bg-neutral-700 relative w-10 cursor-pointer",{
+      "bg-transparent hover:ring-0 ":variant==="secondary"
+    })}>
       <AnimatePresence mode="wait">
         {copying ? (
           <motion.span
@@ -42,7 +45,9 @@ export default function CopyButton({ text }: { text: string }) {
             }}
             className=" absolute"
           >
-            <IconCheck />
+            <IconCheck className={cn("",{
+              "text-muted-foreground":variant === "secondary"
+            })} />
           </motion.span>
         ) : (
           <motion.span
@@ -58,7 +63,9 @@ export default function CopyButton({ text }: { text: string }) {
             }}
              className=" absolute"
           >
-            <IconCopy />
+            <IconCopy className={cn("",{
+              "text-muted-foreground":variant === "secondary"
+            })} />
           </motion.span>
         )}
       </AnimatePresence>

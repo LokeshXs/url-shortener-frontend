@@ -81,7 +81,7 @@ export default function LinkShortenerForm({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(submitHandler)}
-          className=" space-y-6"
+          className=" space-y-6 max-sm:space-y-4"
         >
           <FormField
             control={form.control}
@@ -94,7 +94,7 @@ export default function LinkShortenerForm({
                     disabled={isPending}
                     placeholder="https://tailwindcss.com/docs/hover-focus-and-other-states"
                     {...field}
-                    className=" placeholder:text-neutral-400 focus-visible:ring-neutral-200"
+                    className=" placeholder:text-neutral-400 focus-visible:ring-neutral-200 max-sm:text-sm"
                   />
                 </FormControl>
                 <FormMessage />
@@ -113,7 +113,7 @@ export default function LinkShortenerForm({
                     disabled={isPending}
                     placeholder="code20"
                     {...field}
-                    className=" placeholder:text-neutral-400 focus-visible:ring-neutral-200 max-w-40"
+                    className=" placeholder:text-neutral-400 focus-visible:ring-neutral-200 max-w-40 max-sm:text-sm"
                   />
                 </FormControl>
                 <FormMessage />
@@ -124,7 +124,7 @@ export default function LinkShortenerForm({
             )}
           />
 
-          <div className=" flex justify-between items-end">
+          <div className=" flex justify-between max-sm:flex-col max-sm:items-start items-end">
             <FormField
               control={form.control}
               name="time"
@@ -142,7 +142,7 @@ export default function LinkShortenerForm({
             <Button
               disabled={isPending}
               type="submit"
-              className="min-w-[120px]"
+              className="min-w-[120px] max-sm:mt-4 max-sm:w-full"
             >
               {isPending ? (
                 <Loader />
