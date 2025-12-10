@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
 import ReactQueryProvider from "@/context/ReactQueryProvider";
 import MobileNavBar from "@/components/common/MobileNavBat";
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({
   weight: ["400", "500", "600", "700", "800"],
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     "short url tool",
     "smart link analytics",
   ],
-    metadataBase:new URL("https://urlbit.vercel.app/"),
+    metadataBase:new URL("https://urlbit.space/"),
    openGraph: {
     title: "Urlbit — Simplify and Shorten Your URLs Instantly",
     description:
@@ -79,6 +80,7 @@ export default function RootLayout({
         </body>
       </html>
       </ReactQueryProvider>
+      <Analytics/>
     </ClerkProvider>
   );
 }
