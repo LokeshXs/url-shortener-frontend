@@ -34,7 +34,7 @@ export default function DataTable() {
         return [];
       }
 
-      console.log(token);
+   
       const res = await axios.get(
         `${server_url}/stats`,
 

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Urlbit — Simplify and Shorten Your URLs Instantly",
     description:
       "Shorten, manage, and track your links with Urlbit — the easiest way to share smarter.",
-    url: "https://urlbit.vercel.app/",
+    url: "https://urlbit.space/",
     siteName: "Urlbit",
     images: [
       {
