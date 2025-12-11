@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { SignInButton, useAuth, UserButton  } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
+import { IconBrandGithubFilled } from "@tabler/icons-react";
 
 export default function MobileNavBar() {
 
@@ -31,7 +32,8 @@ export default function MobileNavBar() {
             hidden: pathname === "/dashboard",
           })}
         >
-          <ul className=" flex items-center gap-4">
+       
+          {/* <ul className=" flex items-center gap-4">
             {NAV_LINKS.map((linkObj, _) => (
               <li key={linkObj.label}>
                 <Link href={linkObj.href} className=" text-sm text-muted-foreground hover:text-primary">
@@ -39,7 +41,8 @@ export default function MobileNavBar() {
                 </Link>
               </li>
             ))}
-          </ul>
+          </ul> */}
+              <Button size="sm" asChild className=" bg-muted text-primary rounded-full border border-emerald-600 hover:ring-emerald-100 text-xs"><Link target="_blank" href="https://github.com/LokeshXs/urlbit_url-shortener"><IconBrandGithubFilled className=" text-emerald-600"/> Star on Github</Link></Button>
           <div className=" h-8 w-[1px] bg-gradient-to-b from-transparent via-muted-foreground/40 to-transparent" />
           {isSignedIn ? (
             <Button size="sm"  asChild>

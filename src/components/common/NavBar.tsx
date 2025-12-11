@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { SignInButton, useAuth, UserButton, UserProfile } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
+import { IconBrandGithubFilled } from "@tabler/icons-react";
 
 export default function NavBar() {
   const { scrollYProgress } = useScroll();
@@ -54,6 +55,7 @@ export default function NavBar() {
               </li>
             ))}
           </ul>
+          <Button asChild className=" bg-muted text-primary rounded-full border border-emerald-600 hover:ring-emerald-100"><Link target="_blank" href="https://github.com/LokeshXs/urlbit_url-shortener"><IconBrandGithubFilled className=" text-emerald-600"/> Star on Github</Link></Button>
           <div className=" h-8 w-[1px] bg-gradient-to-b from-transparent via-muted-foreground/40 to-transparent" />
           {isSignedIn ? (
             <Button size="sm" asChild>
